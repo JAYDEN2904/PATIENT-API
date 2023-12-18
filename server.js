@@ -31,6 +31,20 @@ app.get('/patients/:id', async(req, res) => {
   }
 })
 
+//update product
+app.put('/patients/:id',  async (req,res)=> {
+  try {
+    const {id} = req.params;
+    const patient = await Patient.findByIdAndUpdate(id, req.body);
+    //cannot find student in database
+    if(!product){
+      return res.status(404).json({message:`'Cannot find patient with ID ${id}'`})
+    }
+  } catch (error) {
+    res.status(500).json({message: error.message})
+  }
+})
+
 
 
 
