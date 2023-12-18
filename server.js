@@ -21,52 +21,6 @@ app.get('/patients', async(req, res) => {
   }
 })
 
-app.get('/patients/:id', async(req, res) => {
-  try {
-    const {id} = req.params
-    const patient = await Patient.findById(id);
-    res.status(200).json(patient);
-  } catch (error) {
-    res.status(500).json({message: error.message})
-  }
-})
-
-//update product
-app.put('/patients/:id',  async (req,res)=> {
-  try {
-    const {id} = req.params;
-    const patient = await Patient.findByIdAndUpdate(id, req.body);
-    //cannot find student in database
-    if(!product){
-      return res.status(404).json({message:`'Cannot find patient with ID ${id}'`})
-    }
-  } catch (error) {
-    res.status(500).json({message: error.message})
-  }
-})
-
-//deleting a product
-app.delete('/patients/:id', async(req, res) => {
-  try {
-    const {id} = req.params;
-    const patients = await Patient.findByIdAndDelete(id);
-    if (!product) {
-      return res.status(404).json({message: `cannot find patient with ID ${id}`})
-    }
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({message: error.message})
-  }
-})
-
-app.post('/students', async(req, res) => {
-  try {
-    const product = await Product.create(req.body)
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({message: error.message})
-  }
-})
 
 
 mongoose.
